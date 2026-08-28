@@ -45,12 +45,18 @@ def rotate_matrix_90(matrix):
     
     # TODO: n x n 크기의 새로운 배열을 생성하세요 (0으로 초기화)
     pass
-        
+    new_matrix = [ [0 for i in range(n)] for i in range(n)] # [0] * n은 c 구현이라서 더 빠르다, ([0] * n) * n 은 shallow copy 라서 안된다
+    #- [ [0] * n for _ in range(n)]은 괜찮다 : immutable, mutable 객체 - [0] 은 int가 immutable이라서 수정시 리스트에 다른 주소가 저장됨
+
     # TODO: 원본 배열의 각 요소를 회전된 위치에 배치하세요
     # 힌트: (i, j) 위치의 요소는 회전 후 (j, n-1-i) 위치로 이동
     pass
-    
-    return rotated
+    #  위치 필요하니 index 필요?
+
+    for i in range(n):
+        for j in range(n):
+            new_matrix[j][n-1-i] = matrix[i][j]
+    return new_matrix
 
 def print_matrix(matrix):
     """배열을 보기 좋게 출력하는 헬퍼 함수"""

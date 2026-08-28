@@ -42,7 +42,10 @@ def bubble_sort(arr):
     ## arr[j] > arr[j+1]이면 교환
     ## 외부 반복문: n-1번 실행
     pass
-        
+    for i in range(n - 1): #마지막 pass는 할 필요 없다 - 이미 정렬됐다 
+        for j in range(n - i - 1):
+            if(arr[j] > arr[j + 1]):
+                arr[j], arr[j + 1] = arr[j+1] , arr [j]
     return arr
 
 def bubble_sort_optimized(arr):
@@ -57,13 +60,18 @@ def bubble_sort_optimized(arr):
     """
     n = len(arr)
     
-    for i in range(n):
+    for i in range(n - 1): 
         swapped = False  # 교환 발생 여부
         
         # TODO: 내부 반복문과 교환 로직 구현
         # 교환이 발생하면 swapped = True 설정        
         pass
-        
+        for j in range(n - i - 1):
+            if swapped:
+                break
+            if(arr[j] > arr[j + 1]):
+                arr[j], arr[j + 1] = arr[j+1] , arr [j]
+                swapped = True
 
         # TODO: 교환이 없으면 이미 정렬된 것이므로 break
         pass

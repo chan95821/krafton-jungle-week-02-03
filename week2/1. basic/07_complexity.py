@@ -34,9 +34,13 @@ def find_duplicates_brute_force(nums):
     # TODO: 이중 반복문으로 중복 찾기
     ## i번째 원소와 i+1 이후의 모든 원소를 비교
     ## 같은 원소를 찾으면 duplicates에 추가 (중복 추가 방지 필요)
-    pass
-    
-    return duplicates
+    dupset = set()
+    for i in range(n - 1):
+        for j in range(i+1, n):
+            if nums[i] == nums[j]:
+                dupset.add(nums[i])
+
+    return list(dupset) # 중복 추가 방지가 set이 최선? / 공간 복잡도가 k 이니 a in dup  원한듯
 
 def find_duplicates_sorting(nums):
     """
@@ -49,8 +53,15 @@ def find_duplicates_sorting(nums):
     
     # TODO: 배열을 정렬하세요 (nums.sort() 사용)
     pass
-    
+    nums.sort()
     duplicates = []
+    for i in range(len(nums) - 1):
+        if i == 0 and nums[i] == nums[i+1]:
+            duplicates.append(nums[i]) 
+        elif(nums[i] == nums[i+1] and nums[i] != nums[i-1]): # elif 필요 
+            duplicates.append(nums[i])
+    
+    
     
     # TODO: 인접한 원소를 비교하여 중복 찾기
     # i와 i+1 원소가 같고, duplicates에 없으면 추가
@@ -71,7 +82,10 @@ def find_duplicates_hash(nums):
     ## 이미 seen에 있으면 duplicates에 추가
     ## 없으면 seen에 추가
     pass
-    
+    for num in nums:
+        if num in seen:
+            duplicates.add(num)
+        else: seen.add(num)
     return list(duplicates)
 
 def measure_time(func, nums, method_name):
