@@ -64,6 +64,11 @@ def quick_sort_helper(arr, low, high):
     ## 분할하여 피벗 인덱스 얻기
     ## 피벗 왼쪽 부분 재귀 정렬
     ## 피벗 오른쪽 부분 재귀 정렬
+
+    if low >= high:
+        return
+
+    partition()
     pass 
     
 

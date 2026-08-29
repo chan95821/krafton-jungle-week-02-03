@@ -35,14 +35,23 @@ def binary_search(arr, target):
     """
     left = 0
     right = len(arr) - 1
-    
-    # TODO: left가 right보다 작거나 같을 때까지 반복
+
+    while left <= right:
+
+    # TODO: left가 right보다 작거나 같을 때까지 반복 -> 주석 보기 전에 그려봤다 / left/ right 결정하는 것 바로 mid로 두는 (naive) 생각하니 간격이 1에서 더이상 좁혀지지 않음./ 
+    #  그래서 +1, -1 필요. 범위는 '탐색해야 할 범위이므로' 반대쪽은 범위에 포함되고/ mid 쪽은 이미 mid를 비교했으므로 안전하게 제외됨
     ## 중간 인덱스 계산
     ## arr[mid]와 target 비교
     ## 같으면 mid 반환
     ## target이 더 크면 left = mid + 1
     ## target이 더 작으면 right = mid - 1
-    pass
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        elif arr[mid] > target:
+            right = mid - 1
     
     return -1
 

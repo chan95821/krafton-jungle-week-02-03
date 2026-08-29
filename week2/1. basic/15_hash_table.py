@@ -42,14 +42,22 @@ def manage_grades(students):
     """
     # TODO: 평균 점수 계산
     pass
-    
-    
+    score_sum = 0
+    top_score = -1
+    for name, score in students.items():
+        score_sum += score
+        if top_score < score:    # 동일 점수 존재시 list 고려, 기대  출력에 list 표현 없어서 단독 최고 점수만 고려
+            top_student = name
+            top_score = score
+
+    average = score_sum / len(students)
+        
     # TODO: 최고 점수 학생 찾기
     pass
     
     return average, top_student, top_score
 
-def find_student_score(students, name):
+def find_student_score(students:dict, name:str):
     """
     특정 학생의 점수 조회
     
@@ -61,7 +69,7 @@ def find_student_score(students, name):
         점수 (없으면 None)
     """
     # TODO: students에서 name 찾기
-    pass
+    return students.get(name) #예외 발생 말고 None 반환, 아니면 in 사용하기
 
 # 테스트 케이스
 if __name__ == "__main__":
