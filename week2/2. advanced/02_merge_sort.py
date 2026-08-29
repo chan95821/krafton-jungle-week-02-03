@@ -34,7 +34,8 @@ def merge(arr, left, mid, right):
     """
     # TODO: 왼쪽과 오른쪽 부분 배열을 임시 배열로 복사
     pass
-    
+    left_arr = arr[left:mid]
+    right_arr = 
     # TODO: 두 배열을 병합
     pass
     

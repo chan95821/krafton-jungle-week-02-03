@@ -36,15 +36,30 @@ def partition(arr, low, high):
     """
     # TODO: 피벗을 선택 (일반적으로 마지막 원소)
     pass
-    
+    pivot = arr[high] # 피벗 끝이 아닌 난수로 랜덤하게 선택한다면, 균등성 높일 수 있다
     # TODO: i는 작은 원소들의 마지막 인덱스를 추적
     pass
-    
+    i = low
     # TODO: low부터 high-1까지 순회하면서
     ## 현재 원소가 피벗보다 작거나 같으면:
     ##   1. i를 1 증가
     ##   2. arr[i]와 arr[j]를 교환
-    pass
+    
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+
+    arr[i], arr[high] = arr[high], arr[i]
+
+    return i
+
+    
+
+    
+        
+
+        
     
     # TODO: 피벗을 올바른 위치(i+1)에 배치
     pass
@@ -64,11 +79,16 @@ def quick_sort_helper(arr, low, high):
     ## 분할하여 피벗 인덱스 얻기
     ## 피벗 왼쪽 부분 재귀 정렬
     ## 피벗 오른쪽 부분 재귀 정렬
+    
 
-    if low >= high:
-        return
+    # recursion -> partition 이후는 q 번 원소를 기준으로 이상/ 이하 정렬 된 상태. 나머지를 작을 때까지 수행하면 된다.
+    if low < high:
+        q = partition(arr, low, high)
+        quick_sort_helper(arr, low, q -1)
+        quick_sort_helper(arr, q + 1, high)
+        
 
-    partition()
+
     pass 
     
 

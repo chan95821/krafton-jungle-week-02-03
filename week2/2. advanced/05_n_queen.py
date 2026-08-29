@@ -68,6 +68,36 @@ def n_queens(n: int) -> int:
     #       ...
     #   place(0)
     #   return count
+
+    #  -> queen은 열 또는 행에 대해 같이 배치될 수 없으니, 각 row에 하나씩 있어야 한다.
+    # 그렇다면, 각 row에 대해 어떤 col을 선택하냐가 경우의 수
+    #  2차원 배열에 대해, 각 선택이 차지하는 텃세는 겹치지 않으므로 stack으로 기억해도 된다.
+#  TODO : 이 발상대로 구현해보기 - O(n^2) 공간복잡도, 그래도 직관적인 
+
+
+
+    #  또는 hint 대로 구현? DONE
+    cols = [0] * n
+    count = 0
+    def backtrack(idx):
+        if idx == n:
+            nonlocal count
+            count += 1
+        else:
+            for cand in range(n):
+                isAppliable = True
+                for check_idx in range(idx):
+                    if cols[check_idx] == cand or abs(cols[check_idx] - cand) == idx - check_idx: # idx 와 check_idx 는 모두 row에 해당 - row의 차 만큼이 열의 차 만큼 되면 대각선 위치
+                      isAppliable = False
+                      break
+                if isAppliable:
+                    cols[idx] = cand
+                    backtrack(idx + 1)
+
+    backtrack(0)
+    return count
+            
+        
     pass
 
 
