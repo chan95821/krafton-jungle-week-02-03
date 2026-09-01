@@ -34,14 +34,30 @@ def merge(arr, left, mid, right):
     """
     # TODO: 왼쪽과 오른쪽 부분 배열을 임시 배열로 복사
     pass
-    left_arr = arr[left:mid]
-    right_arr = 
+    left_arr = arr[left:mid + 1] # fix : merge helper가 left - mid 까지 했기 때문에, left arr도 mid 인덱스를 포함해야 함 
+    right_arr = arr[mid + 1:right+1]
+    n_l = mid - left + 1
+    n_r = right - mid
     # TODO: 두 배열을 병합
-    pass
-    
-    
+    i_l = 0
+    i_r = 0
+    i_arr = left
     # TODO: left_arr와 right_arr를 비교하며 작은 값을 arr에 복사
+    while i_l < n_l and i_r < n_r:
+        if left_arr[i_l] < right_arr[i_r]:
+            arr[i_arr] = left_arr[i_l]
+            i_l += 1
+        else:
+            arr[i_arr] = right_arr[i_r]
+            i_r += 1
+        i_arr += 1
+
+    for item in left_arr[i_l:] + right_arr[i_r:]:
+        arr[i_arr] = item
+        i_arr += 1
+
     pass
+    
     
     # TODO: 남은 원소들을 복사
     # left_arr에 남은 원소가 있으면 복사
@@ -62,6 +78,14 @@ def merge_sort_helper(arr, left, right):
     ## 왼쪽 절반 재귀 정렬
     ## 오른쪽 절반 재귀 정렬
     ## 정렬된 두 절반을 병합
+
+    if left < right:
+        mid = (left + right) // 2 
+        merge_sort_helper(arr,left, mid)   
+        merge_sort_helper(arr, mid + 1, right) # !! 여기를 mid +1 이 아니라 mid로 하면 1 차이시 call stack 한도까지 재귀 호출: 범위가 안좁혀져서 - e.g. 2, 3 -> (2,1) (2, 3) 호출됨 -> 계속 반복
+        merge(arr, left, mid, right)
+
+
     pass
 
 def merge_sort(arr):
