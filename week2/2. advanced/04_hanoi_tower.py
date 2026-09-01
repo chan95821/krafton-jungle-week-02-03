@@ -87,10 +87,11 @@ def hanoi_moves(n: int) -> list:
         1       3       2       4
         2       3       1       5
         '''
-        status = {1, 2, 3}
-        status.remove(orig)
-        status.remove(dest)
-        spare = status.pop()
+        # status = {1, 2, 3}
+        # status.remove(orig)
+        # status.remove(dest)
+        # spare = status.pop()
+        spare = 6 - orig - dest
         if n == 1:
             moves.append((orig, dest))
         else: 
