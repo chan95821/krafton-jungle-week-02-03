@@ -8,8 +8,8 @@ class Solution:
             while i % 5 == 0: # input constraint에 의해 최대 4번
                 fives += 1
                 i //= 5 # /= 5를 하면, i가 float 될 수 있다. 그러면 while문 조건 만족 안될 수 있음
-            while i % 2 == 0: # 동일하게 최대 4번 
-                twos += 1
-                i //= 2
+            # while i % 2 == 0: # 동일하게 최대 4번 
+            #     twos += 1
+            #     i //= 2  --> twos는 5보다 항상 많이 나오기 때문에 고려할 필요 없다.
         
-        return fives if fives < twos else twos
+        return fives # if fives < twos else twos
