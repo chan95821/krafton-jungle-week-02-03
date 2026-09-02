@@ -5,7 +5,7 @@ class Solution:
         max = -1
         if len(points) == 1:
             return 1
-
+#  -> 직선 저장하려면 정규화해야한다 - gcd로 나누기, 부호 고려 / set으로 만들어서 dictionary 완성 이후 전체 점 비교하면 N^2 으로 가능/// 
         for i in range(len(points) - 1):
             for j in range(i + 1, len(points)):
                 count = 0
