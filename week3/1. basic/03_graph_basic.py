@@ -28,7 +28,10 @@
 - 무방향 그래프는 양방향 추가
 """
 
-def create_graph(vertices, edges, directed=False):
+from typing import Tuple
+
+
+def create_graph(vertices, edges:list[tuple], directed=False):
     """
     그래프 생성 (인접 리스트)
     
@@ -42,10 +45,16 @@ def create_graph(vertices, edges, directed=False):
     """
     # TODO: 빈 그래프 초기화
     pass
-    
+    graph = {}
+    for vertex in range(vertices):
+        graph[vertex] = []
     # TODO: 간선 추가
     ## 간선 추가 (u에서 v로)
-    ## 무방향 그래프면 반대 방향도 추가
+    ## 무방향 그래프면 반대 방향도 추가   -> 중복 거르는 로직 없다
+    for s, e in edges:
+        graph[s].append(e)
+        if not directed:
+            graph[e].append(s)
     pass
     
     return graph

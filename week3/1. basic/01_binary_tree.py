@@ -36,25 +36,28 @@ class TreeNode:
     """이진 트리 노드"""
     def __init__(self, value):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left : TreeNode | None = None
+        self.right : TreeNode | None = None
 
 def preorder(root):
     """전위 순회: 루트 → 왼쪽 → 오른쪽"""
     result = []
     
-    # TODO: root가 None이면 빈 리스트 반환
+    # TODO: root가 None이면 빈 리스트 반환  => 자식이 없어도 호출 
     pass
-    
+    if root is None:
+        return result
     # TODO: 루트 값 추가
+    result.append(root.value) # list += int 타입시 TypeError: 'int' object is not iterable -> += (__iadd__) 연산시 param이 iterable해야 함.
     pass
     
     # TODO: 왼쪽 서브트리 순회
     pass
-    
+    result += preorder(root.left)
     # TODO: 오른쪽 서브트리 순회
     pass
-    
+    result += preorder(root.right)
+
     return result
 
 def inorder(root):
@@ -63,16 +66,17 @@ def inorder(root):
     
     # TODO: root가 None이면 빈 리스트 반환
     pass
-    
+    if root is None:
+        return result
     # TODO: 왼쪽 서브트리 순회
     pass
-    
+    result += inorder(root.left)
     # TODO: 루트 값 추가
     pass
-    
+    result.append(root.value)
     # TODO: 오른쪽 서브트리 순회
     pass
-    
+    result += inorder(root.right)
     return result
 
 def postorder(root):
@@ -81,16 +85,17 @@ def postorder(root):
     
     # TODO: root가 None이면 빈 리스트 반환
     pass
-    
+    if root is None:
+        return result
     # TODO: 왼쪽 서브트리 순회
     pass
-    
+    result += postorder(root.left)
     # TODO: 오른쪽 서브트리 순회
     pass
-    
+    result += postorder(root.right)
     # TODO: 루트 값 추가
     pass
-    
+    result.append(root.value)
     return result
 
 # 테스트 케이스

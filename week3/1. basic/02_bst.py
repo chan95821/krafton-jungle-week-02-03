@@ -20,7 +20,7 @@
 트리:
       5
      / \
-    3   7
+    3   7     # 자식 트리의 모든 원소가
    / \
   2   4
 
@@ -36,8 +36,8 @@
 class TreeNode:
     def __init__(self, value):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left : TreeNode | None = None #Type Hinting은 사용되지는 않지만 __annotations__에 저장하기 때문에, Pydantic이 type 확인할 수 있다
+        self.right: TreeNode | None = None
 
 def search_bst(root, target):
     """
@@ -51,12 +51,21 @@ def search_bst(root, target):
         True/False
     """
     # TODO: root가 None이면 False 반환
-    pass
     
+    if root is None: # 여담 : python equality(==) 는 보통 nested item을 모두 비교한다. \
+        # 그렇지만 dunder로 __eq__ 구현해야 하므로, 기본 행동은 아니다. 정의 없으면 Object Identity만 비교한다.
+        return False
     # TODO: 값을 찾으면 True 반환
-    ## target이 작으면 왼쪽 서브트리에서 검색
-    ## target이 크면 오른쪽 서브트리에서 검색
-    pass
+    node = root
+    while node is not None:
+        if node.value == target:
+            return True
+        elif node.value > target:
+            node = node.left
+        elif node.value < target:
+            node = node.right
+    return False
+
 
 # 테스트 케이스
 if __name__ == "__main__":

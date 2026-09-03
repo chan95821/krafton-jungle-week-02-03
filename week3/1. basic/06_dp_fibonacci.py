@@ -83,18 +83,27 @@ def fibonacci_memo(n, memo=None):
     """
     # TODO: memo가 None이면 빈 딕셔너리로 초기화
     pass
-    
+    if memo is None : # 여담 : Falsy평가되므로 명시적으로 None 과 비교
+        memo={}
     # TODO: base case 
     pass
-    
-    # TODO: 이미 계산한 값이 memo에 있으면 반환
-    pass
-    
-    # TODO: 재귀 호출하여 계산하고 memo에 저장
-    pass
-    
+    if n <= 0:
+        return 0
+    if n <= 2:
+        return 1
+
+    if memo.get(n-1) is None:
+        memo[n-1] = fibonacci_memo(n-1, memo)
+
+    if memo.get(n-2) is None:
+        memo[n-2] = fibonacci_memo(n-2, memo)
+
+    memo[n] = memo[n-1] + memo[n-2]
     return memo[n]
 
+
+
+# bottom up으로도 
 # 테스트 케이스
 if __name__ == "__main__":
     # 테스트 케이스 1
