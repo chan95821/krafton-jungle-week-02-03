@@ -79,12 +79,31 @@ def dijkstra(n: int, edges: list, start: int) -> list:
     # TODO: dist 를 INF 로 초기화하고 dist[start] = 0
     # TODO: 우선순위 큐(heapq)로 BFS-like 최단경로 탐색
     # TODO: dist 반환
-    pass
+    graph = [[] for _ in range(n)]
+    dist = [INF] * n # inf를 덧씌울 것이고, 비교용이니 같은 주소라도 상관없다 
+    for f, t, w in edges:
+        graph[f].append((t, w))
+
+    dist[start] = 0
+    q = []
+    heapq.heappush(q, dist[start])
+
+    while q:
+        cur_vertex = heapq.heappop(q)
+        # TODO : 그래프 순회 그림 / 최단 경로/ cycle시 감지/ 
+        # weight 음수일 때는 dijkstra 못쓴다./ 찾은 dist 중 가장 작은 거리의 목적지는 그것보다 더 긴 경로를 찾을 수 없다. - 가중치가 >= 0이기 때문에
+        # 다시 방문하지 않는 것(VISITED 기억 사용)이 핵심이나, 이 구현은 다시 방문할 수 있다. 그래서 음수 weight도 정상 작동한다. - (총합이 음수인)음수 사이클은 안된다
+        for to_vertex, weight in graph[cur_vertex]:
+            if dist[to_vertex] > dist[cur_vertex] + weight:
+                dist[to_vertex] = dist[cur_vertex] + weight
+                heapq.heappush(q, to_vertex)
+
+    return dist
 
 
 def _format(dist):
     """출력 표기를 위한 헬퍼: float('inf') 는 'INF' 로 보여줌"""
-    return [('INF' if x == INF else x) for x in dist]
+    return [('INF' if x == INF else x) for x in dist] # singleton inf
 
 
 if __name__ == "__main__":

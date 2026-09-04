@@ -41,6 +41,10 @@ def lcs_length(s1: str, s2: str) -> int:
     # TODO: 이중 반복문으로 점화식에 따라 dp 채우기
     # TODO: dp[len(s1)][len(s2)] 반환
     pass
+    if not s1 or not s2: return 0
+
+    dp = [[0] * (len(s1) + 1) for _ in range(len(s2) + 1)]
+    
 
 
 if __name__ == "__main__":

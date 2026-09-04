@@ -14,7 +14,7 @@
 
 예제:
 입력: [(1, 4), (3, 5), (0, 6), (5, 7), (3, 8), (5, 9), (6, 10), (8, 11), (8, 12), (2, 13), (12, 14)]
-출력: 4개
+출력: 4개 
 선택: [(1, 4), (5, 7), (8, 11), (12, 14)]
 
 힌트:
@@ -32,21 +32,17 @@ def select_meetings(meetings):
     Returns:
         (배정된 회의 개수, 선택된 회의 리스트)
     """
-    # TODO: 회의가 없으면 0 반환
-    pass
-    
-    # TODO: 종료 시간 기준으로 정렬
-    pass
-    
+    #종료 시점이 작은 회의를 매번 찾아야 하므로 sort 해놓는게 
     selected = []
-    
-    # TODO: 첫 번째 회의 선택
-    pass
-    
-    # TODO: 나머지 회의들 확인
-    ## 이전 회의가 끝난 후 시작하는 회의만 선택
-    pass
-    
+    meetings.sort(key= lambda meeting : meeting[1]) 
+    print(meetings)
+    endtime = float('-inf')
+    for meeting in meetings:
+        start, end = meeting
+        if start >= endtime:
+            selected.append(meeting)
+            endtime = end
+
     return len(selected), selected
 
 # 테스트 케이스

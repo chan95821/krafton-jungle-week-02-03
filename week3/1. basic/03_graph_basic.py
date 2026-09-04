@@ -50,7 +50,7 @@ def create_graph(vertices, edges:list[tuple], directed=False):
         graph[vertex] = []
     # TODO: 간선 추가
     ## 간선 추가 (u에서 v로)
-    ## 무방향 그래프면 반대 방향도 추가   -> 중복 거르는 로직 없다
+    ## 무방향 그래프면 반대 방향도 추가   -> edge 중복 거르는 로직 없다
     for s, e in edges:
         graph[s].append(e)
         if not directed:
