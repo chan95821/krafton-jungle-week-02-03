@@ -62,7 +62,7 @@ def create_graph(vertices, edges:list[tuple], directed=False):
 # 테스트 케이스
 if __name__ == "__main__":
     # 테스트 케이스 1: 무방향 그래프
-    vertices = 4
+    vertices = 4                        # vertex의 item 규칙이 정해져 있으니, 굳이 collection 만들 필요 없다. -> 다만 4, 5에 대해 vertex가 가진 도착점을 자주 봐야 하므로 각 vertex에 대해 도착점 저장한다
     edges = [(0, 1), (0, 2), (1, 2), (2, 3)]
     
     print("=== 무방향 그래프 ===")

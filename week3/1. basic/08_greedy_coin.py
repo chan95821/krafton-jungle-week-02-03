@@ -47,7 +47,20 @@ def make_change_greedy(change, coins):
     ## 현재 동전으로 거슬러줄 수 있는 개수 계산    
     ## 개수가 0보다 크면 결과에 추가
     pass
-    
+    while change > 0:
+
+        for val in coins: #coins는 내림차순 정렬이므로, 가능한 가장 큰 동전이 선택된다
+            if change - val >= 0:
+                change -= val
+                if result.get(val) is None:
+                    result[val] = 0
+                result[val] += 1
+                total_coins += 1
+                break
+
+
+            if val == coins[-1]: #거스를 수 없는 경우 - 마지막 단위로도 맞아떨어지지 않을 때
+                return -1, {}
     return total_coins, result
 
 # 테스트 케이스
