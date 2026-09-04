@@ -40,33 +40,38 @@ def topological_sort(vertices, edges):
     """
     # TODO: 그래프와 진입 차수 초기화
     pass
-    in_degrees = defaultdict(set)  # edge 중복 무시
-    # TODO: 그래프 구성 및 진입 차수 계산
-    pass
-    for vertex in range(vertices):     # in-degrees만 사용하기 때문에, 들어오는 edge가 없는 vertices도 len() 위해 생성해줘야 함/
-        in_degrees[vertex] = set()
-
+    in_degrees = [0] * vertices
+    graph = [set() for _ in range(vertices)]
     for f, t in edges:
-        in_degrees[t].add(f)
+        graph[f].add(t)
+    for f in graph:
+        for t in f:
+            in_degrees[t] += 1
+
     # TODO: 진입 차수가 0인 정점들을 큐에 추가
+
     pass
-    q = deque([k  for k, v in in_degrees.items() if len(v) == 0])
+    q = deque([vertex for vertex, cnt in enumerate(in_degrees) if cnt == 0])
     result = []
     
     # TODO: 큐가 빌 때까지 반복  -> 연결되어 있는 것들만 가능?
     ## 큐에서 정점 꺼내기
     ## 인접한 정점들의 진입 차수 감소
-    pass
+    
     while q:
-        cur_v = q.pop()
-        result.append(cur_v)
-        for k, v in edges:   # graph 구현 없어서 edge 순회 -> 중복이 그대로 반영됨 :(
-            if k == cur_v:
-                if in_degrees[v]:
-                    in_degrees[v].remove(k)
+        vertex_from = q.pop()
+        result.append(vertex_from)   
+        for vertex_to in graph[vertex_from]:
+            in_degrees[vertex_to] -= 1
+            if in_degrees[vertex_to] == 0:
+                q.appendleft(vertex_to)
+        in_degrees[vertex_from] = -1 # 다시 방문하지 않게 -1 처리
 
-                if not in_degrees[v]: # falsy하면
-                    q.appendleft(v)
+        # q += [v for v, cnt in enumerate(in_degrees) if cnt == 0 and v in graph[vertex_from]]  # 순회 후 in degrees가 0이면 방문 가능하다 - q에 추가 , += 와 extend() 동작 같다 
+
+    # 만약 result 개수가 vertices 개수보다 작다면, in_degrees가 0이 아닌 원소가 있는 것 <- 고립된 원소도 in_degrees가 0이니 추가된다. cycle은 항상 1 이상일 수 밖에 없으므로 result에 추가 안된다 - cyclic 부분 있다
+    if len(result) < vertices: 
+        return []
 
     return result
 
