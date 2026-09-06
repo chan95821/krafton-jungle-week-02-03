@@ -61,10 +61,10 @@ def bfs(graph, start):
         tovisit = q.pop()
         visited.append(tovisit)
         for cand in graph[tovisit]:
-            if cand not in visited_set: # set을 하나 만들지 
+            if cand not in visited_set: # set을 하나 만들지
                 q.appendleft(cand)
                 visited_set.add(cand)
-            
+
     return visited
 
 # 테스트 케이스

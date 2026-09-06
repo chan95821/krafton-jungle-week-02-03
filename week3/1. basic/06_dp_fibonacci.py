@@ -81,25 +81,38 @@ def fibonacci_memo(n, memo=None):
     Returns:
         n번째 피보나치 수
     """
+    # TD 방식 
     # TODO: memo가 None이면 빈 딕셔너리로 초기화
     pass
-    if memo is None : # 여담 : Falsy평가되므로 명시적으로 None 과 비교
+    if memo is None : # 여담 : Falsy평가되므로 명시적으로 None 과 비교  == is
         memo={}
     # TODO: base case 
     pass
     if n <= 0:
         return 0
-    if n <= 2:
+    elif n <= 2:
         return 1
 
     if memo.get(n-1) is None:
         memo[n-1] = fibonacci_memo(n-1, memo)
-
-    if memo.get(n-2) is None:
-        memo[n-2] = fibonacci_memo(n-2, memo)
-
+        
+    if memo.get(n-2) is None:    
+        memo[n-2] = fibonacci_memo(n-2, memo)    
+        #--> 호출 스택에서 n-1의 경우가 이미 처리되므로 생략 가능해 보인다
+        #  그러나 그렇게 하면 base case 경우인 memo의 [1]이 저장되지 않는다(호출이 안되기 때문에). 그래서 base 조건 (n == 1)일 때가 호출되지 않아 dp 안된다
+        #  그러니 생략하기 전에, base case 등 끝 값을 중점으로 정상 생성되는지 생각해봐야 한다
     memo[n] = memo[n-1] + memo[n-2]
+
     return memo[n]
+
+# ----------------- bottom up 방식
+    # memo = [0] * ((n+1) if n > 2 else 3)
+    # memo[0] = 0
+    # memo[1] = 1
+    # for i in range(2, n+1):
+    #     memo[i] = memo[i-1] + memo[i-2]
+
+    # return memo[n]
 
 
 
