@@ -3,6 +3,7 @@ class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         # bruteforce 비교시 WORD^2 * wordlength/ wordlength서로 다른 경우 생각해봐야 
         # BFS는 O(V + E) E는 최악 V^2
+        # TODO: wildcard 방법 써봐야 
 
         if endWord not in wordList:
             return 0

@@ -14,7 +14,7 @@
 
 예제:
 입력: [(1, 4), (3, 5), (0, 6), (5, 7), (3, 8), (5, 9), (6, 10), (8, 11), (8, 12), (2, 13), (12, 14)]
-출력: 4개 
+출력: 4개
 선택: [(1, 4), (5, 7), (8, 11), (12, 14)]
 
 힌트:
@@ -35,7 +35,7 @@ def select_meetings(meetings):
     #종료 시점이 작은 회의를 매번 찾아야 하므로 sort 해놓는게 
     selected = []
     meetings.sort(key= lambda meeting : meeting[1]) 
-    print(meetings)
+
     endtime = float('-inf')
     for meeting in meetings:
         start, end = meeting
