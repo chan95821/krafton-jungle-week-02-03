@@ -14,7 +14,7 @@ class Solution:
             #palindrome 연장은 항상 한 번 (+2)만큼밖에 안된다. 만약 연장했다면 바로 넘어가면 된다
             if ch_l == ch_r and idx_l >= 0:
                 pal_len[idx_r] = pal_len[idx_r-1] + 2
-            else:# palindrome 연장 안된다. -> brute force 해봐야? -> 1 또는 2일 것이기 때문에 괜찮아 보인다
+            else:# palindrome 연장 안된다. -> brute force 해봐야? -> 1 또는 2일 것이기 때문에 괜찮아 보인다 -> 실패
                 if s[idx_r-1] == s[idx_r]:
                     pal_len[idx_r] = 2
                 else: pal_len[idx_r] = 1
