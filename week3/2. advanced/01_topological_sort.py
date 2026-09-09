@@ -36,7 +36,7 @@ def topological_sort(vertices, edges):
         edges: (출발, 도착) 간선 리스트
     
     Returns:
-        위상 정렬 순서
+        위상 정렬 순서, n <= 300, n <= 300
     """
     # TODO: 그래프와 진입 차수 초기화
     pass
@@ -44,6 +44,7 @@ def topological_sort(vertices, edges):
     graph = [set() for _ in range(vertices)]
     for f, t in edges:
         graph[f].add(t)
+        
     for f in graph:
         for t in f:
             in_degrees[t] += 1
@@ -65,7 +66,7 @@ def topological_sort(vertices, edges):
             in_degrees[vertex_to] -= 1
             if in_degrees[vertex_to] == 0:
                 q.appendleft(vertex_to)
-        in_degrees[vertex_from] = -1 # 다시 방문하지 않게 -1 처리
+        # in_degrees[vertex_from] = -1 # 다시 방문하지 않게 -1 처리
 
         # q += [v for v, cnt in enumerate(in_degrees) if cnt == 0 and v in graph[vertex_from]]  # 순회 후 in degrees가 0이면 방문 가능하다 - q에 추가 , += 와 extend() 동작 같다 
 

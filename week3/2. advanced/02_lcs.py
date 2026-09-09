@@ -40,17 +40,18 @@ def lcs_length(s1: str, s2: str) -> int:
     if not len(s1) or not len(s2):
         return 0
     # TODO: (len(s1)+1) x (len(s2)+1) 크기의 2차원 dp 배열을 0 으로 초기화
-    dp = [[0] * (len(s1) + 1) for _ in range(len(s1) + 1)] # dp가 [s1의 현재까지 읽은 인덱스], [s2의 현재까지 읽은 인덱스] 에서 최적해를 저장,
-
+    # dp = [[] * (len(s2) + 1) for _ in range(len(s1) + 1)] # dp가 [s1의 현재까지 읽은 인덱스], [s2의 현재까지 읽은 인덱스] 에서 가장 긴 길이 저장,
+    dp = [[0] * (len(s2) + 1) for _ in (s1 + "a")]
     # TODO: 이중 반복문으로 점화식에 따라 dp 채우기
-
-   
+    for idx_1 in range(1, len(s1) + 1):
+        for idx_2 in range(1, len(s2)+1):
+          if s1[idx_1-1] == s2[idx_2-1]:
+            dp[idx_1][idx_2] = dp[idx_1-1][idx_2-1] + 1 if dp[idx_1-1][idx_2-1] + 1 > dp[idx_1-1][idx_2] else dp[idx_1-1][idx_2]
+          else:
+              dp[idx_1][idx_2] = dp[idx_1][idx_2-1] if dp[idx_1][idx_2-1] > dp[idx_1-1][idx_2] else dp[idx_1-1][idx_2]
+              
     # TODO: dp[len(s1)][len(s2)] 반환
-    pass
-    if not s1 or not s2: return 0
-
-    dp = [[0] * (len(s1) + 1) for _ in range(len(s2) + 1)]
-    
+    return dp[len(s1)][len(s2)]
 
 
 if __name__ == "__main__":
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     print()
 
     print("[테스트 5] 표준 예시 2")
-    print(f'  s1="AGGTAB", s2="GXTXAYB" -> LCS 길이={lcs_length("AGGTAB", "GXTXAYB")}')
+    print(
+        f'  s1="AGGTAB", s2="GXTXAYB" -> LCS 길이={lcs_length("AGGTAB", "GXTXAYB")}')
     print()
 
     print("[테스트 6] 두 LCS 후보가 길이가 같은 경우")
-    print(f'  s1="ABCBDAB", s2="BDCABA" -> LCS 길이={lcs_length("ABCBDAB", "BDCABA")}')
+    print(
+        f'  s1="ABCBDAB", s2="BDCABA" -> LCS 길이={lcs_length("ABCBDAB", "BDCABA")}')

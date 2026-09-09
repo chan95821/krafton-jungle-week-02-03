@@ -80,23 +80,26 @@ def dijkstra(n: int, edges: list, start: int) -> list:
     # TODO: 우선순위 큐(heapq)로 BFS-like 최단경로 탐색
     # TODO: dist 반환
     graph = [[] for _ in range(n)]
-    dist = [INF] * n # inf를 덧씌울 것이고, 비교용이니 같은 주소라도 상관없다 
+    dist = [INF] * n # float은 immutable
     for f, t, w in edges:
-        graph[f].append((t, w))
+        graph[f].append((w, t))
 
     dist[start] = 0
     q = []
-    heapq.heappush(q, dist[start])
-
+    heapq.heappush(q, (0, start))
+    visited = set()
     while q:
-        cur_vertex = heapq.heappop(q)
+        cur_dist, cur_vertex = heapq.heappop(q)
+        visited.add(cur_vertex)
         # TODO : 그래프 순회 그림 / 최단 경로/ cycle시 감지/ 
         # weight 음수일 때는 dijkstra 못쓴다./ 찾은 dist 중 가장 작은 거리의 목적지는 그것보다 더 긴 경로를 찾을 수 없다. - 가중치가 >= 0이기 때문에
         # 다시 방문하지 않는 것(VISITED 기억 사용)이 핵심이나, 이 구현은 다시 방문할 수 있다. 그래서 음수 weight도 정상 작동한다. - (총합이 음수인)음수 사이클은 안된다
-        for to_vertex, weight in graph[cur_vertex]:
+        for weight, to_vertex in graph[cur_vertex]:
+            if to_vertex in visited:
+                continue
             if dist[to_vertex] > dist[cur_vertex] + weight:
                 dist[to_vertex] = dist[cur_vertex] + weight
-                heapq.heappush(q, to_vertex)
+                heapq.heappush(q, (dist[to_vertex],to_vertex))
 
     return dist
 
